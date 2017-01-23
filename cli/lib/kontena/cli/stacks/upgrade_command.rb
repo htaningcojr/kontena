@@ -21,7 +21,14 @@ module Kontena::Cli::Stacks
       spinner "Upgrading stack #{pastel.cyan(name)} " do
         update_stack(stack)
       end
-      Kontena.run("stack deploy #{name}") if deploy?
+      if deploy?
+        result = Kontena.run("stack deploy #{name}")
+        unless result.zero?
+          msg = "Deploy failed"
+          msg << ": #{$!.message}" if $!
+          exit_with_error msg
+        end
+      end
     end
 
     def update_stack(stack)
