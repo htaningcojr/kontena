@@ -24,8 +24,18 @@ module Grids
       add_error(:user, :invalid, 'Operation not allowed') unless user.can_create?(Grid)
       existing = Grid.find_by(name: self.name)
       add_error(:grid, :already_exists, "Grid with name #{self.name} already exists") if existing
-      IPAddr.new(self.subnet) rescue add_error(:subnet, :invalid, $!.message) if self.subnet
-      IPAddr.new(self.supernet) rescue add_error(:supernet, :invalid, $!.message) if self.supernet
+
+      if self.subnet
+        @subnet = IPAddr.new(self.subnet) rescue add_error(:subnet, :invalid, $!.message)
+
+        if @subnet
+          add_error(:subnet, :size, "Grid subnet must be a /16") unless self.subnet.end_with? '/16'
+        end
+      end
+
+      if self.supernet
+        @supernet = IPAddr.new(self.supernet) rescue add_error(:supernet, :invalid, $!.message)
+      end
     end
 
     def execute
