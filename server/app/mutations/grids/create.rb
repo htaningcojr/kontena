@@ -27,10 +27,6 @@ module Grids
 
       if self.subnet
         @subnet = IPAddr.new(self.subnet) rescue add_error(:subnet, :invalid, $!.message)
-
-        if @subnet
-          add_error(:subnet, :size, "Grid subnet must be a /16") unless self.subnet.end_with? '/16'
-        end
       end
 
       if self.supernet

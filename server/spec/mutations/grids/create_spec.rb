@@ -86,16 +86,6 @@ describe Grids::Create do
       end
 
       context "when subnet is provided" do
-        it "fails to create grid with an incorrect subnet" do
-          outcome = described_class.new(
-              user: user,
-              name: "test-grid",
-              subnet: "10.80.0.0/24",
-            ).run
-          expect(outcome).to_not be_success
-          expect(outcome.errors.symbolic).to eq('subnet' => :size)
-        end
-
         it "creates grid with the given subnet" do
           outcome = described_class.new(
               user: user,
@@ -104,6 +94,16 @@ describe Grids::Create do
             ).run
           expect(outcome).to be_success
           expect(outcome.result.subnet).to eq('10.80.0.0/16')
+        end
+
+        it "creates grid with the given subnet, even if it's different" do
+          outcome = described_class.new(
+              user: user,
+              name: "test-grid",
+              subnet: "192.168.42.0/24",
+            ).run
+            expect(outcome).to be_success
+            expect(outcome.result.subnet).to eq('192.168.42.0/24')
         end
       end
 
