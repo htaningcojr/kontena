@@ -176,7 +176,7 @@ module Docker
     # Container CIDR address within the overlay network.
     # Will be missing/nil if container is not attached to the overlay network.
     #
-    # For kontena 0.16 containers, this will be 10.81.X.Y/12, and gets translated to 10.81.X.Y/16.
+    # For kontena 0.16 containers, this will be 10.81.X.Y/19, and gets translated to 10.81.X.Y/16.
     #
     # @return [String, NilClass]
     def overlay_cidr
