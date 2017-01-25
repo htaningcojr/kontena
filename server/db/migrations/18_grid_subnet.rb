@@ -4,8 +4,8 @@ class GridSubnet < Mongodb::Migration
     Network.create_indexes
 
     Grid.each do |grid|
-      grid.subnet = Grid.SUBNET unless grid.subnet
-      grid.supernet = Grid.SUPERNET unless grid.supernet
+      # using save will write the implicit subnet/supernet field default SUBNET/SUPERNET values
+      grid.save
     end
   end
 end
