@@ -111,7 +111,7 @@ module Kontena::Workers
     def attach_overlay(container)
       if container.overlay_network.nil?
         # overlay network migration for 0.16 compat
-        # override overlay network /12 -> /16 suffix for existing containers that may need to be migrated
+        # override overlay network /19 -> /16 suffix for existing containers that may need to be migrated
         overlay_cidr = "#{container.overlay_ip}/#{OVERLAY_SUFFIX}"
 
         # check for un-migrated containers cached at start
