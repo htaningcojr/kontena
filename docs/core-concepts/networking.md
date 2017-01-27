@@ -39,7 +39,7 @@ Each grid is configured with a single subnet (default `10.81.0.0/16`) and supern
 Both of these private RFC1918 IP address spaces are used for internal overlay networking within each grid.
 These overlay network addresses are only unique within a grid; different grids can (and will) use the same overlay network IP addresses.
 
-The grid subnet (`10.81.0.0/16`) is used to provide overlay networking addresses for both host nodes and service contaienrs.
+The grid subnet (`10.81.0.0/16`) is used to provide overlay networking addresses for both host nodes and service containers.
 The grid subnet is split into two parts: `10.81.0.0/17` and `10.81.128.0/17`.
 The lower half is used for the `10.81.0.X` host node overlay network addresses allocated by the Kontena server, and used to bootstrap the grid infrastructure services such as etcd.
 
