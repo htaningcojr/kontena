@@ -83,7 +83,7 @@ module Kontena
         on_close(event)
       end
       @ws.on :error do |event|
-        error "connection closed with error: #{event.message}"
+        error "connection error: #{event.message}"
       end
     end
 
@@ -139,7 +139,7 @@ module Kontena
       elsif event.code == 4010
         handle_invalid_version
       end
-      info "connection closed with code #{event.code}: #{event.reason}"
+      info "connection closed with code #{event.code}"
     rescue => exc
       error exc.message
     end
